@@ -48,7 +48,7 @@ Este documento presenta un flujo reproducible para analizar el rendimiento de ar
 
 El analisis sigue el modelo de Gomez y Gomez (1984), ajustado con `aov()` y su estructura de errores. Las comparaciones multiples se obtienen con `emmeans` y letras de agrupamiento compacto para las interacciones que interesan: `gen:nitro` y `gen:planting`.
 
-**Profesor:Dr. Byron González**
+**Profesor: Dr. Byron González**
 
 ## Tabla de contenido
 
@@ -68,15 +68,15 @@ El analisis sigue el modelo de Gomez y Gomez (1984), ajustado con `aov()` y su e
 
 La respuesta es `yield`, el rendimiento observado en cada unidad experimental. Las variables tienen la siguiente funcion:
 
-| Variable | Funcion en el diseno |
+| Variable | Función en el diseño |
 | --- | --- |
-| `rep` | Repeticion o bloque del experimento |
-| `gen` | Variedad, asignada a franjas en una direccion |
-| `nitro` | Nivel de nitrogeno, asignado a franjas perpendiculares |
-| `planting` | Metodo de plantacion, asignado a las intersecciones |
+| `rep` | Repetición o bloque del experimento |
+| `gen` | Variedad, asignada a franjas en una dirección |
+| `nitro` | Nivel de nitrógeno, asignado a franjas perpendiculares |
+| `planting` | Método de plantación, asignado a las intersecciones |
 | `yield` | Rendimiento de arroz |
 
-En un strip-split-plot no todas las fuentes de variacion tienen el mismo error experimental. Por eso no se debe analizar el experimento como si fuera un factorial completamente aleatorizado con un unico error residual. La clausula `Error()` de `aov()` representa los estratos asociados con las repeticiones, las franjas y sus combinaciones.
+En un strip-split-plot no todas las fuentes de variación tienen el mismo error experimental. Por eso no se debe analizar el experimento como si fuera un factorial completamente aleatorizado con un único error residual. La clausula `Error()` de `aov()` representa los estratos asociados con las repeticiones, las franjas y sus combinaciones.
 
 ## 1. Instalar y cargar paquetes
 
@@ -96,7 +96,7 @@ library(multcomp)
 library(desplot)
 ```
 
-La instalacion solo debe ejecutarse cuando sea necesaria. En un servidor de GitHub Actions o en otro entorno automatizado, es preferible instalar las dependencias en una etapa separada y dejar el documento dedicado al analisis.
+La instalación solo debe ejecutarse cuando sea necesaria. En un servidor de GitHub Actions o en otro entorno automatizado, es preferible instalar las dependencias en una etapa separada y dejar el documento dedicado al analisis.
 
 ## 2. Cargar y revisar los datos
 
