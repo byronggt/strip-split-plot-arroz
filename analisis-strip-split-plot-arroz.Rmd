@@ -48,6 +48,8 @@ Este documento presenta un flujo reproducible para analizar el rendimiento de ar
 
 El analisis sigue el modelo de Gomez y Gomez (1984), ajustado con `aov()` y su estructura de errores. Las comparaciones multiples se obtienen con `emmeans` y letras de agrupamiento compacto para las interacciones que interesan: `gen:nitro` y `gen:planting`.
 
+**Profesor:Dr. Byron González**
+
 ## Tabla de contenido
 
 - [Objetivo y estructura experimental](#objetivo-y-estructura-experimental)
