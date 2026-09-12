@@ -478,7 +478,7 @@ de ambas franjas.</p>
 multiples se obtienen con <code>emmeans</code> y letras de agrupamiento
 compacto para las interacciones que interesan: <code>gen:nitro</code> y
 <code>gen:planting</code>.</p>
-<p><strong>Profesor:Dr. Byron González</strong></p>
+<p><strong>Profesor: Dr. Byron González</strong></p>
 <div id="tabla-de-contenido" class="section level2">
 <h2>Tabla de contenido</h2>
 <ul>
@@ -513,25 +513,25 @@ unidad experimental. Las variables tienen la siguiente funcion:</p>
 <thead>
 <tr class="header">
 <th>Variable</th>
-<th>Funcion en el diseno</th>
+<th>Función en el diseño</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code>rep</code></td>
-<td>Repeticion o bloque del experimento</td>
+<td>Repetición o bloque del experimento</td>
 </tr>
 <tr class="even">
 <td><code>gen</code></td>
-<td>Variedad, asignada a franjas en una direccion</td>
+<td>Variedad, asignada a franjas en una dirección</td>
 </tr>
 <tr class="odd">
 <td><code>nitro</code></td>
-<td>Nivel de nitrogeno, asignado a franjas perpendiculares</td>
+<td>Nivel de nitrógeno, asignado a franjas perpendiculares</td>
 </tr>
 <tr class="even">
 <td><code>planting</code></td>
-<td>Metodo de plantacion, asignado a las intersecciones</td>
+<td>Método de plantación, asignado a las intersecciones</td>
 </tr>
 <tr class="odd">
 <td><code>yield</code></td>
@@ -539,9 +539,9 @@ unidad experimental. Las variables tienen la siguiente funcion:</p>
 </tr>
 </tbody>
 </table>
-<p>En un strip-split-plot no todas las fuentes de variacion tienen el
+<p>En un strip-split-plot no todas las fuentes de variación tienen el
 mismo error experimental. Por eso no se debe analizar el experimento
-como si fuera un factorial completamente aleatorizado con un unico error
+como si fuera un factorial completamente aleatorizado con un único error
 residual. La clausula <code>Error()</code> de <code>aov()</code>
 representa los estratos asociados con las repeticiones, las franjas y
 sus combinaciones.</p>
@@ -564,7 +564,7 @@ library(agridat)
 library(emmeans)
 library(multcomp)
 library(desplot)</code></pre>
-<p>La instalacion solo debe ejecutarse cuando sea necesaria. En un
+<p>La instalación solo debe ejecutarse cuando sea necesaria. En un
 servidor de GitHub Actions o en otro entorno automatizado, es preferible
 instalar las dependencias en una etapa separada y dejar el documento
 dedicado al analisis.</p>
@@ -659,14 +659,14 @@ with(dat, table(rep, gen, nitro, planting))</code></pre>
 ##   R1  1  1  1  1  1  1
 ##   R2  1  1  1  1  1  1
 ##   R3  1  1  1  1  1  1</code></pre>
-<p>Antes de ajustar el modelo, hay que verificar que cada combinacion
+<p>Antes de ajustar el modelo, hay que verificar que cada combinación
 prevista exista y que las repeticiones esten correctamente
 identificadas. La tabla de frecuencias tambien ayuda a detectar datos
 faltantes o celdas con diferente numero de observaciones.</p>
 </div>
 <div id="preparar-los-factores" class="section level2">
 <h2>3. Preparar los factores</h2>
-<p>Aunque <code>nitro</code> puede aparecer como variable numerica, en
+<p>Aunque <code>nitro</code> puede aparecer como variable numérica, en
 este experimento representa niveles discretos de tratamiento. Debe
 tratarse como factor para que el modelo estime una media por nivel y no
 una tendencia lineal impuesta por los valores numericos.</p>
@@ -716,7 +716,7 @@ Croquis de campo del experimento strip-split-plot.
 </p>
 </div>
 <p><code>out1 = rep</code> separa visualmente las repeticiones.
-<code>col = nitro</code> colorea las franjas de nitrogeno y
+<code>col = nitro</code> colorea las franjas de nitrógeno y
 <code>text = planting</code> etiqueta el tratamiento de plantacion en
 cada interseccion. Esta figura no sustituye al modelo, pero sirve para
 validar que la estructura declarada en <code>Error()</code> corresponde
@@ -734,15 +734,15 @@ aleatorizacion del diseño.</p>
     Error(rep + rep:nf + rep:gen + rep:nf:gen),
   data = dat
 )</code></pre>
-<p>La interpretacion de los terminos de error es la siguiente:</p>
+<p>La interpretación de los terminos de error es la siguiente:</p>
 <ul>
-<li><code>rep</code>: variacion entre repeticiones.</li>
-<li><code>rep:nf</code>: error asociado con las franjas de nitrogeno
-dentro de repeticion.</li>
+<li><code>rep</code>: variación entre repeticiones.</li>
+<li><code>rep:nf</code>: error asociado con las franjas de nitrógeno
+dentro de repetición.</li>
 <li><code>rep:gen</code>: error asociado con las franjas de variedades
-dentro de repeticion.</li>
+dentro de repetición.</li>
 <li><code>rep:nf:gen</code>: error de las intersecciones <code>nf</code>
-por <code>gen</code>, dentro de repeticion; este es el estrato en el que
+por <code>gen</code>, dentro de repetición; este es el estrato en el que
 se evaluan los tratamientos de <code>planting</code> y las interacciones
 que los incluyen.</li>
 </ul>
@@ -843,8 +843,8 @@ anova_m1</code></pre>
 </div>
 <div id="comparar-gennitro" class="section level2">
 <h2>7. Comparar <code>gen:nitro</code></h2>
-<p>Las medias marginales estimadas para cada combinacion de variedad y
-nitrogeno se solicitan con <code>emmeans(m1, ~ gen * nf)</code>.
+<p>Las medias marginales estimadas para cada combinación de variedad y
+nitrógeno se solicitan con <code>emmeans(m1, ~ gen * nf)</code>.
 <code>emmeans</code> usa el modelo ajustado y, por tanto, respeta la
 informacion disponible y los ajustes del modelo en lugar de calcular
 solamente promedios aritmeticos sin contexto.</p>
@@ -1204,13 +1204,13 @@ dentro de cada nivel de nitrogeno, es mas claro estimar y contrastar con
 ## 
 ## Results are averaged over the levels of: planting 
 ## P value adjustment: tukey method for comparing a family of 6 estimates</code></pre>
-<p>Esta ultima forma evita mezclar en una sola familia comparaciones
+<p>Esta última forma evita mezclar en una sola familia comparaciones
 entre niveles de nitrogeno que responden a preguntas diferentes.</p>
 </div>
 <div id="comparar-genplanting" class="section level2">
 <h2>8. Comparar <code>gen:planting</code></h2>
 <p>El mismo procedimiento se aplica a la interaccion entre variedad y
-metodo de plantacion. Primero se calculan las medias marginales
+método de plantación. Primero se calculan las medias marginales
 estimadas y despues se realizan las comparaciones multiples.</p>
 <pre class="r"><code>means_gen_planting &lt;- emmeans(m1, ~ gen * planting)
 means_gen_planting</code></pre>
@@ -1334,8 +1334,8 @@ cld_gen_planting</code></pre>
 ## NOTE: If two or more means share the same grouping symbol,
 ##       then we cannot show them to be different.
 ##       But we also did not show them to be the same.</code></pre>
-<p>Para comparar metodos de plantacion dentro de cada variedad, que
-suele ser la interpretacion mas util cuando <code>gen:planting</code> es
+<p>Para comparar métodos de plantación dentro de cada variedad, que
+suele ser la interpretación mas útil cuando <code>gen:planting</code> es
 significativa:</p>
 <pre class="r"><code>emmeans(m1, pairwise ~ planting | gen, adjust = &quot;tukey&quot;)</code></pre>
 <pre><code>## $emmeans
@@ -1399,16 +1399,16 @@ significativa:</p>
 ##  P1 - P2   -2012.3 306 36  -6.574  &lt;.0001
 ## 
 ## Results are averaged over the levels of: nf</code></pre>
-<p>La pregunta que responde este conjunto de contrastes es: <strong>que
-metodos de plantacion difieren dentro de cada variedad?</strong> La
-interpretacion debe hacerse con las medias y sus errores estandar, no
+<p>La pregunta que responde este conjunto de contrastes es: <strong>qué
+métodos de plantación difieren dentro de cada variedad?</strong> La
+interpretación debe hacerse con las medias y sus errores estándar, no
 solamente con las letras.</p>
 </div>
 <div id="interpretar-y-reportar-los-resultados" class="section level2">
 <h2>9. Interpretar y reportar los resultados</h2>
 <p>Un reporte completo debe incluir:</p>
 <ol style="list-style-type: decimal">
-<li>La unidad experimental y la estructura de asignacion de
+<li>La unidad experimental y la estructura de asignación de
 <code>gen</code>, <code>nitro</code> y <code>planting</code>.</li>
 <li>El modelo utilizado, incluida la estructura
 <code>Error(rep + rep:nf + rep:gen + rep:nf:gen)</code>.</li>
@@ -1416,18 +1416,18 @@ solamente con las letras.</p>
 estadisticos F y valores p.</li>
 <li>Las medias marginales estimadas para las interacciones de
 interes.</li>
-<li>El metodo de ajuste por comparaciones multiples, aqui Tukey.</li>
+<li>El método de ajuste por comparaciones multiples, aquí Tukey.</li>
 <li>Las letras de agrupamiento, indicando el nivel de significancia
 empleado.</li>
 </ol>
-<p>Las letras no deben interpretarse como una escala de calidad por si
+<p>Las letras no deben interpretarse como una escala de calidad por sí
 mismas. Una media con la letra <code>A</code> no es necesariamente
 agronomicamente superior a otra con <code>B</code>; la conclusion
 estadistica depende de la diferencia estimada, su incertidumbre y la
 pregunta experimental. Tambien conviene reportar las unidades de
 <code>yield</code> y el nivel de significancia, por ejemplo
 <code>alpha = 0.05</code>.</p>
-<p>Para una tabla final ordenada de cada interaccion:</p>
+<p>Para una tabla final ordenada de cada interacción:</p>
 <pre class="r"><code>resultado_gen_nf &lt;- as.data.frame(cld_gen_nf)
 resultado_gen_planting &lt;- as.data.frame(cld_gen_planting)
 

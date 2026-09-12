@@ -113,11 +113,11 @@ summary(dat)
 with(dat, table(rep, gen, nitro, planting))
 ```
 
-Antes de ajustar el modelo, hay que verificar que cada combinacion prevista exista y que las repeticiones esten correctamente identificadas. La tabla de frecuencias tambien ayuda a detectar datos faltantes o celdas con diferente numero de observaciones.
+Antes de ajustar el modelo, hay que verificar que cada combinación prevista exista y que las repeticiones esten correctamente identificadas. La tabla de frecuencias tambien ayuda a detectar datos faltantes o celdas con diferente numero de observaciones.
 
 ## 3. Preparar los factores
 
-Aunque `nitro` puede aparecer como variable numerica, en este experimento representa niveles discretos de tratamiento. Debe tratarse como factor para que el modelo estime una media por nivel y no una tendencia lineal impuesta por los valores numericos.
+Aunque `nitro` puede aparecer como variable numérica, en este experimento representa niveles discretos de tratamiento. Debe tratarse como factor para que el modelo estime una media por nivel y no una tendencia lineal impuesta por los valores numericos.
 
 ```{r factores}
 dat <- transform(
@@ -149,7 +149,7 @@ desplot(
 )
 ```
 
-`out1 = rep` separa visualmente las repeticiones. `col = nitro` colorea las franjas de nitrogeno y `text = planting` etiqueta el tratamiento de plantacion en cada interseccion. Esta figura no sustituye al modelo, pero sirve para validar que la estructura declarada en `Error()` corresponde al arreglo experimental.
+`out1 = rep` separa visualmente las repeticiones. `col = nitro` colorea las franjas de nitrógeno y `text = planting` etiqueta el tratamiento de plantacion en cada interseccion. Esta figura no sustituye al modelo, pero sirve para validar que la estructura declarada en `Error()` corresponde al arreglo experimental.
 
 ## 5. Ajustar el modelo strip-split-plot
 
@@ -163,12 +163,12 @@ m1 <- aov(
 )
 ```
 
-La interpretacion de los terminos de error es la siguiente:
+La interpretación de los terminos de error es la siguiente:
 
-- `rep`: variacion entre repeticiones.
-- `rep:nf`: error asociado con las franjas de nitrogeno dentro de repeticion.
-- `rep:gen`: error asociado con las franjas de variedades dentro de repeticion.
-- `rep:nf:gen`: error de las intersecciones `nf` por `gen`, dentro de repeticion; este es el estrato en el que se evaluan los tratamientos de `planting` y las interacciones que los incluyen.
+- `rep`: variación entre repeticiones.
+- `rep:nf`: error asociado con las franjas de nitrógeno dentro de repetición.
+- `rep:gen`: error asociado con las franjas de variedades dentro de repetición.
+- `rep:nf:gen`: error de las intersecciones `nf` por `gen`, dentro de repetición; este es el estrato en el que se evaluan los tratamientos de `planting` y las interacciones que los incluyen.
 
 La formula debe mantenerse vinculada al modo en que se aleatorizaron los tratamientos. Cambiarla por un modelo con un unico residual puede producir pruebas F y errores estandar incorrectos para algunas fuentes.
 
@@ -191,7 +191,7 @@ anova_m1
 
 ## 7. Comparar `gen:nitro`
 
-Las medias marginales estimadas para cada combinacion de variedad y nitrogeno se solicitan con `emmeans(m1, ~ gen * nf)`. `emmeans` usa el modelo ajustado y, por tanto, respeta la informacion disponible y los ajustes del modelo en lugar de calcular solamente promedios aritmeticos sin contexto.
+Las medias marginales estimadas para cada combinación de variedad y nitrógeno se solicitan con `emmeans(m1, ~ gen * nf)`. `emmeans` usa el modelo ajustado y, por tanto, respeta la informacion disponible y los ajustes del modelo en lugar de calcular solamente promedios aritmeticos sin contexto.
 
 ```{r medias-gen-nf}
 means_gen_nf <- emmeans(m1, ~ gen * nf)
@@ -230,11 +230,11 @@ Estas comparaciones responden a la pregunta: **que variedades presentan rendimie
 emmeans(m1, pairwise ~ gen | nf, adjust = "tukey")
 ```
 
-Esta ultima forma evita mezclar en una sola familia comparaciones entre niveles de nitrogeno que responden a preguntas diferentes.
+Esta última forma evita mezclar en una sola familia comparaciones entre niveles de nitrogeno que responden a preguntas diferentes.
 
 ## 8. Comparar `gen:planting`
 
-El mismo procedimiento se aplica a la interaccion entre variedad y metodo de plantacion. Primero se calculan las medias marginales estimadas y despues se realizan las comparaciones multiples.
+El mismo procedimiento se aplica a la interaccion entre variedad y método de plantación. Primero se calculan las medias marginales estimadas y despues se realizan las comparaciones multiples.
 
 ```{r medias-gen-planting}
 means_gen_planting <- emmeans(m1, ~ gen * planting)
@@ -257,28 +257,28 @@ cld_gen_planting <- multcomp::cld(
 cld_gen_planting
 ```
 
-Para comparar metodos de plantacion dentro de cada variedad, que suele ser la interpretacion mas util cuando `gen:planting` es significativa:
+Para comparar métodos de plantación dentro de cada variedad, que suele ser la interpretación mas útil cuando `gen:planting` es significativa:
 
 ```{r contrastes-gen-planting}
 emmeans(m1, pairwise ~ planting | gen, adjust = "tukey")
 ```
 
-La pregunta que responde este conjunto de contrastes es: **que metodos de plantacion difieren dentro de cada variedad?** La interpretacion debe hacerse con las medias y sus errores estandar, no solamente con las letras.
+La pregunta que responde este conjunto de contrastes es: **qué métodos de plantación difieren dentro de cada variedad?** La interpretación debe hacerse con las medias y sus errores estándar, no solamente con las letras.
 
 ## 9. Interpretar y reportar los resultados
 
 Un reporte completo debe incluir:
 
-1. La unidad experimental y la estructura de asignacion de `gen`, `nitro` y `planting`.
+1. La unidad experimental y la estructura de asignación de `gen`, `nitro` y `planting`.
 2. El modelo utilizado, incluida la estructura `Error(rep + rep:nf + rep:gen + rep:nf:gen)`.
 3. El resumen del ANOVA con grados de libertad, cuadrados medios, estadisticos F y valores p.
 4. Las medias marginales estimadas para las interacciones de interes.
-5. El metodo de ajuste por comparaciones multiples, aqui Tukey.
+5. El método de ajuste por comparaciones multiples, aquí Tukey.
 6. Las letras de agrupamiento, indicando el nivel de significancia empleado.
 
-Las letras no deben interpretarse como una escala de calidad por si mismas. Una media con la letra `A` no es necesariamente agronomicamente superior a otra con `B`; la conclusion estadistica depende de la diferencia estimada, su incertidumbre y la pregunta experimental. Tambien conviene reportar las unidades de `yield` y el nivel de significancia, por ejemplo `alpha = 0.05`.
+Las letras no deben interpretarse como una escala de calidad por sí mismas. Una media con la letra `A` no es necesariamente agronomicamente superior a otra con `B`; la conclusion estadistica depende de la diferencia estimada, su incertidumbre y la pregunta experimental. Tambien conviene reportar las unidades de `yield` y el nivel de significancia, por ejemplo `alpha = 0.05`.
 
-Para una tabla final ordenada de cada interaccion:
+Para una tabla final ordenada de cada interacción:
 
 ```{r tablas-finales}
 resultado_gen_nf <- as.data.frame(cld_gen_nf)
