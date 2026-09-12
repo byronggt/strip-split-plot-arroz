@@ -1,5 +1,4 @@
 ---
-title: "Analisis strip-split-plot del rendimiento de arroz"
 author: "Dr. Byron González"
 output:
   html_document:
@@ -48,8 +47,6 @@ knitr::opts_chunk$set(
 Este documento presenta un flujo reproducible para analizar el rendimiento de arroz con el conjunto de datos `gomez.stripsplitplot` del paquete `agridat`. El experimento corresponde a un arreglo **strip-split-plot**: las variedades (`gen`) se asignan a franjas en una direccion, las dosis de nitrogeno (`nitro`) a franjas perpendiculares y los metodos de plantacion (`planting`) a las intersecciones de ambas franjas.
 
 El analisis sigue el modelo de Gomez y Gomez (1984), ajustado con `aov()` y su estructura de errores. Las comparaciones multiples se obtienen con `emmeans` y letras de agrupamiento compacto para las interacciones que interesan: `gen:nitro` y `gen:planting`.
-
-**Profesor:** Dr. Byron González
 
 ## Tabla de contenido
 
